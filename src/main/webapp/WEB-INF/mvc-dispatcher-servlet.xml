@@ -1,0 +1,41 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+<context:component-scan base-package="com.springapp.mvc"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- Enables the Spring MVC @controller programming model -->
+    <mvc:annotation-driven />
+
+    <!-- Handles HTTP GET requests for /resources/** by efficiently serving
+        up static resources in the ${webappRoot}/resources directory -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+    <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+        <property name="host" value="localhost" />
+    </bean>
+
+    <!-- MongoTemplate for connecting and quering the documents in the database -->
+    <bean id="customermongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongo" ref="mongo" />
+        <constructor-arg name="databaseName" value="users" />
+
+    </bean>
+    <!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
+    <bean id="repository" class="com.springapp.mvc.repository.UserRepository"/>
+    <bean id="service" class="com.springapp.mvc.service.UserService"/>
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+</beans>

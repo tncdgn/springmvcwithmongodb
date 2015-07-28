@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="springmvcwithmongodb:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="springmvcwithmongodb.war">
+      <element id="artifact" artifact-name="springmvcwithmongodb:war exploded" />
+    </root>
+  </artifact>
+</component>
