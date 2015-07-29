@@ -2,7 +2,7 @@ Description:
 
 This sample  project makes insert,update and delete by using spring mvc and mongodb.
 
-Heroku link will be added soon.
+Heroku link :userslist.herokuapp.com/users
 
 Technologies used:
 
